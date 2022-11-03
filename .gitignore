@@ -1,3 +1,9 @@
 __*
-Win32
+
+# Ignore the target without the test data
+Win32/*
+!Win32/Debug
+Win32/Debug/*
+!Win32/Debug/books.json
+
 *.local

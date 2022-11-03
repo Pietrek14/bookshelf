@@ -29,7 +29,6 @@ object MainPage: TMainPage
     Align = alTop
     TabOrder = 0
     TextHint = #55357#56590' Search'
-    ExplicitWidth = 473
   end
   object Genre: TComboBox
     Left = 368
@@ -50,8 +49,5 @@ object MainPage: TMainPage
     Align = alLeft
     ItemHeight = 13
     TabOrder = 2
-    ExplicitLeft = 152
-    ExplicitTop = 128
-    ExplicitHeight = 97
   end
 end

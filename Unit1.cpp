@@ -13,6 +13,9 @@ __fastcall TMainPage::TMainPage(TComponent* Owner)
 	: TForm(Owner)
 {
 }
+
+#include <iostream>
+
 void __fastcall TMainPage::load_books(TObject *Sender)
 {
 	System::UnicodeString file_contents;
@@ -28,55 +31,52 @@ void __fastcall TMainPage::load_books(TObject *Sender)
         return;
 	}
 
-	auto *string_reader = new TStringReader(file_contents);
-    auto *json_text_reader = new TJsonTextReader(string_reader);
-	auto *json_reader = new TJSONIterator(json_text_reader);
+	auto *books = (TJSONArray*) TJSONObject::ParseJSONValueUTF8(
+		TEncoding::ASCII->GetBytes(file_contents),
+		0
+	);
+
+	int book_num = books->Size();
 
 	this->books.clear();
+	this->books.reserve(book_num);
 
-    Book current_book;
-	bool reading_book = false;
+	__try {
+		for(int i = 0; i < book_num; i++) {
+			auto *book = (TJSONObject*) books->Get(i);
+			Book current_book;
 
-	while(json_reader->Next()) {
-		switch(json_reader->Type) {
-			// Start of a book
-			case TJsonToken::StartObject:
-				json_reader->Recurse();
-                current_book = Book();
-				reading_book = true;
-				break;
-			case TJsonToken::EndObject:
-				reading_book = false;
-				this->books.push_back(current_book);
-				break;
-			case TJsonToken::String:
-				if(reading_book) {
-					if(json_reader->Key == "title") {
-						current_book.title = json_reader->AsString;
-						MessageDlg(
-							json_reader->AsString,
-							mtError, TMsgDlgButtons() << mbOK,
-							0
-						);
-                    }
-                }
-				break;
-			default:
-                break;
+			current_book.title = book->Get("title")->JsonValue->ToString();
+			current_book.series = book->Get("series")->JsonValue->ToString();
+			current_book.author = book->Get("author")->JsonValue->ToString();
+			current_book.genre = book->Get("genre")->JsonValue->ToString();
+			current_book.description = book->Get("description")
+				->JsonValue
+				->ToString();
+			current_book.release_date = book->Get("release_date")
+				->JsonValue
+				->ToString();
+			current_book.location = book->Get("location")
+				->JsonValue
+				->ToString();
+			current_book.rating = StrToInt(
+				book->Get("rating")->JsonValue->ToString()
+			);
+			current_book.cover_path = book->Get("cover")->JsonValue->ToString();
+
+            this->books.push_back(current_book);
         }
+	}
+	__finally {
+        books->Free();
     }
 
-    this->update_book_data(this->BookList);
-
-	delete string_reader;
-	delete json_text_reader;
-	delete json_reader;
+	update_list(this->BookList);
 }
 
 //---------------------------------------------------------------------------
 
-/// The Sender *must* be a ListBox
-void __fastcall TMainPage::update_book_data(TListBox *list_box)
+void __fastcall TMainPage::update_list(TListBox *list_box)
 {
     list_box->Items->Clear();
 

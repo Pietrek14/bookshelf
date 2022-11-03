@@ -4,7 +4,7 @@
 #define Unit1H
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
-#include <System.JSON.Builders.hpp>
+#include <System.JSON.hpp>
 #include <System.IOUtils.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
@@ -17,6 +17,15 @@
 //---------------------------------------------------------------------------
 struct Book {
     System::UnicodeString title;
+    System::UnicodeString series;
+	System::UnicodeString author;
+	System::UnicodeString genre;
+	System::UnicodeString description;
+	System::UnicodeString release_date;
+	System::UnicodeString location;
+	int rating;
+    System::UnicodeString cover_path;
+
 };
 
 class TMainPage : public TForm
@@ -27,7 +36,7 @@ __published:	// IDE-managed Components
 	TLabel *GenreLabel;
 	TListBox *BookList;
 	void __fastcall load_books(TObject *Sender);
-	void __fastcall update_book_data(TListBox *Sender);
+	void __fastcall update_list(TListBox *Sender);
 private:	// User declarations
 	std::vector<Book> books;
 public:		// User declarations
