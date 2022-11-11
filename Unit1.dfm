@@ -1,9 +1,9 @@
 object MainPage: TMainPage
   Left = 0
   Top = 0
-  Caption = 'Bookshelf'
-  ClientHeight = 340
-  ClientWidth = 551
+  Caption = ';'
+  ClientHeight = 346
+  ClientWidth = 550
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,7 +24,7 @@ object MainPage: TMainPage
   object SearchBar: TEdit
     Left = 0
     Top = 0
-    Width = 551
+    Width = 550
     Height = 21
     Align = alTop
     TabOrder = 0
@@ -45,9 +45,41 @@ object MainPage: TMainPage
     Left = 0
     Top = 21
     Width = 121
-    Height = 319
+    Height = 325
     Align = alLeft
     ItemHeight = 13
     TabOrder = 2
+  end
+  object BookPanel: TGridPanel
+    Left = 127
+    Top = 56
+    Width = 423
+    Height = 290
+    ColumnCollection = <
+      item
+        Value = 25.000000000000000000
+      end
+      item
+        Value = 25.000000000000000000
+      end
+      item
+        Value = 25.000000000000000000
+      end
+      item
+        Value = 25.000000000000000000
+      end>
+    ControlCollection = <>
+    Padding.Left = 10
+    Padding.Top = 10
+    Padding.Right = 10
+    Padding.Bottom = 10
+    RowCollection = <
+      item
+        Value = 50.000000000000000000
+      end
+      item
+        Value = 50.000000000000000000
+      end>
+    TabOrder = 3
   end
 end

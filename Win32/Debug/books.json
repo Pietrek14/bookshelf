@@ -8,17 +8,17 @@
 		"release_date": "09-11-2001",
 		"location": "na stole po lewej",
 		"rating": 4,
-		"cover": "harry_potter.png"
+		"cover": "covers/harry_potter.png"
 	},
 	{
 		"title": "Man",
 		"series": "",
-		"author": "J.K. Rowling",
-		"genre": "Fantasy",
+		"author": "Tymon Płoch",
+		"genre": "Komedia",
 		"description": "_______________",
-		"release_date": "09-11-2001",
-		"location": "na stole po lewej",
-		"rating": 4,
-		"cover": "harry_potter.png"
+		"release_date": "11-09-2001",
+		"location": "na stole po prawej",
+		"rating": 3,
+		"cover": "covers/man.png"
 	}
 ]

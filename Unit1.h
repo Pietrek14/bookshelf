@@ -12,20 +12,23 @@
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
+#include <Vcl.Imaging.pngimage.hpp>
+#include <Book.h>
+#include <Unit2.h>
 #include <vector>
 #include <unordered_map>
 //---------------------------------------------------------------------------
-struct Book {
-    System::UnicodeString title;
-    System::UnicodeString series;
-	System::UnicodeString author;
-	System::UnicodeString genre;
-	System::UnicodeString description;
-	System::UnicodeString release_date;
-	System::UnicodeString location;
-	int rating;
-    System::UnicodeString cover_path;
+class TBookCover : TImage {
+    size_t id;
 
+public:
+	__fastcall virtual TBookCover(
+		TComponent *owner,
+		size_t _id,
+		System::UnicodeString cover_path
+	);
+
+	void __fastcall open_book_page(TObject*);
 };
 
 class TMainPage : public TForm
@@ -35,8 +38,11 @@ __published:	// IDE-managed Components
 	TComboBox *Genre;
 	TLabel *GenreLabel;
 	TListBox *BookList;
+	TGridPanel *BookPanel;
 	void __fastcall load_books(TObject *Sender);
 	void __fastcall update_list(TListBox *Sender);
+	void __fastcall update_book_panel(TGridPanel *book_panel);
+	void __fastcall open_book_page(int book_index);
 private:	// User declarations
 	std::vector<Book> books;
 public:		// User declarations
