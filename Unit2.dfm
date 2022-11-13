@@ -2,8 +2,8 @@ object Form2: TForm2
   Left = 0
   Top = 0
   Caption = 'Form2'
-  ClientHeight = 331
-  ClientWidth = 548
+  ClientHeight = 334
+  ClientWidth = 538
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,7 +13,7 @@ object Form2: TForm2
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object Image1: TImage
+  object BookCover: TImage
     Left = 24
     Top = 40
     Width = 161
@@ -1741,13 +1741,166 @@ object Form2: TForm2
       0DB99D3CBD3F17E3F8FC3F1D6AFA7688E7551F0000000049454E44AE426082}
     Stretch = True
   end
+  object AuthorLabel: TLabel
+    Left = 317
+    Top = 76
+    Width = 37
+    Height = 13
+    Caption = 'Author:'
+  end
+  object SeriesLabel: TLabel
+    Left = 317
+    Top = 103
+    Width = 33
+    Height = 13
+    Caption = 'Series:'
+  end
+  object GenreLabel: TLabel
+    Left = 317
+    Top = 130
+    Width = 33
+    Height = 13
+    Caption = 'Genre:'
+  end
+  object DescriptionLabel: TLabel
+    Left = 224
+    Top = 152
+    Width = 57
+    Height = 13
+    Caption = 'Description:'
+  end
+  object ReleaseDateLabel: TLabel
+    Left = 286
+    Top = 255
+    Width = 68
+    Height = 13
+    Caption = 'Release Date:'
+  end
+  object LocationLabel: TLabel
+    Left = 310
+    Top = 285
+    Width = 44
+    Height = 13
+    Caption = 'Location:'
+  end
+  object RatingLabel: TLabel
+    Left = 319
+    Top = 313
+    Width = 35
+    Height = 13
+    Caption = 'Rating:'
+  end
   object TitleField: TEdit
     Left = 224
     Top = 40
     Width = 289
-    Height = 21
+    Height = 27
     Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
     TabOrder = 0
     TextHint = 'Title'
+  end
+  object AuthorField: TEdit
+    Left = 360
+    Top = 73
+    Width = 153
+    Height = 21
+    Enabled = False
+    TabOrder = 1
+  end
+  object SeriesField: TEdit
+    Left = 360
+    Top = 100
+    Width = 153
+    Height = 21
+    Enabled = False
+    TabOrder = 2
+  end
+  object GenreSelect: TComboBox
+    Left = 360
+    Top = 127
+    Width = 153
+    Height = 21
+    Enabled = False
+    TabOrder = 3
+    Items.Strings = (
+      'Comedy'
+      'Drama'
+      'Horror'
+      'Thriller'
+      'Science-Fiction'
+      'Fantasy'
+      'Children'
+      'Other')
+  end
+  object ReleaseDateField: TDateTimePicker
+    Left = 360
+    Top = 255
+    Width = 153
+    Height = 21
+    Date = 44878.000000000000000000
+    Time = 0.601873101848468700
+    Enabled = False
+    TabOrder = 4
+  end
+  object LocationField: TEdit
+    Left = 360
+    Top = 282
+    Width = 153
+    Height = 21
+    Hint = 'po'#380'yczone'
+    Enabled = False
+    TabOrder = 5
+  end
+  object RatingField: TEdit
+    Left = 360
+    Top = 309
+    Width = 17
+    Height = 21
+    Alignment = taCenter
+    Enabled = False
+    MaxLength = 1
+    NumbersOnly = True
+    TabOrder = 6
+    Text = '0'
+  end
+  object EditButton: TButton
+    Left = 392
+    Top = 309
+    Width = 57
+    Height = 21
+    Caption = 'Edit'
+    TabOrder = 7
+    OnClick = EditButtonClick
+  end
+  object CoverPathField: TEdit
+    Left = 24
+    Top = 305
+    Width = 161
+    Height = 21
+    TabOrder = 8
+  end
+  object DescriptionField: TMemo
+    Left = 224
+    Top = 171
+    Width = 289
+    Height = 78
+    Enabled = False
+    Lines.Strings = (
+      'DescriptionField')
+    TabOrder = 9
+  end
+  object SaveButton: TButton
+    Left = 455
+    Top = 309
+    Width = 58
+    Height = 21
+    Caption = 'Save'
+    TabOrder = 10
   end
 end

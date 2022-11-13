@@ -1,7 +1,7 @@
 object MainPage: TMainPage
   Left = 0
   Top = 0
-  Caption = ';'
+  Caption = 'Bookshelf'
   ClientHeight = 346
   ClientWidth = 550
   Color = clBtnFace
@@ -41,20 +41,11 @@ object MainPage: TMainPage
     Items.Strings = (
       'All')
   end
-  object BookList: TListBox
-    Left = 0
-    Top = 21
-    Width = 121
-    Height = 325
-    Align = alLeft
-    ItemHeight = 13
-    TabOrder = 2
-  end
   object BookPanel: TGridPanel
-    Left = 127
-    Top = 56
-    Width = 423
-    Height = 290
+    Left = 0
+    Top = 51
+    Width = 550
+    Height = 291
     ColumnCollection = <
       item
         Value = 25.000000000000000000
@@ -80,6 +71,6 @@ object MainPage: TMainPage
       item
         Value = 50.000000000000000000
       end>
-    TabOrder = 3
+    TabOrder = 2
   end
 end

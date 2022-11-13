@@ -4,8 +4,8 @@
 		"series": "Harry Potter",
 		"author": "J.K. Rowling",
 		"genre": "Fantasy",
-		"description": "_______________",
-		"release_date": "09-11-2001",
+		"description": "lorem ipsum dolor sit amet",
+		"release_date": "09.11.2001",
 		"location": "na stole po lewej",
 		"rating": 4,
 		"cover": "covers/harry_potter.png"
@@ -13,12 +13,23 @@
 	{
 		"title": "Man",
 		"series": "",
-		"author": "Tymon Płoch",
-		"genre": "Komedia",
+		"author": "Tymon Ploch",
+		"genre": "Comedy",
 		"description": "_______________",
-		"release_date": "11-09-2001",
+		"release_date": "11.09.2001",
 		"location": "na stole po prawej",
 		"rating": 3,
+		"cover": "covers/man.png"
+	},
+	{
+		"title": "A",
+		"series": "",
+		"author": "Tymon Ploch",
+		"genre": "Science-Fiction",
+		"description": "_______________",
+		"release_date": "04.03.2004",
+		"location": "",
+		"rating": 4,
 		"cover": "covers/man.png"
 	}
 ]

@@ -15,6 +15,7 @@
 #include <Vcl.Imaging.pngimage.hpp>
 #include <Book.h>
 #include <Unit2.h>
+#include <Vcl.ComCtrls.hpp>
 #include <vector>
 #include <unordered_map>
 //---------------------------------------------------------------------------
@@ -37,7 +38,6 @@ __published:	// IDE-managed Components
 	TEdit *SearchBar;
 	TComboBox *Genre;
 	TLabel *GenreLabel;
-	TListBox *BookList;
 	TGridPanel *BookPanel;
 	void __fastcall load_books(TObject *Sender);
 	void __fastcall update_list(TListBox *Sender);

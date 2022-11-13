@@ -124,7 +124,6 @@ void __fastcall TMainPage::load_books(TObject *Sender)
         books->Free();
     }
 
-	update_list(this->BookList);
     update_book_panel(this->BookPanel);
 }
 
@@ -160,4 +159,3 @@ void __fastcall TMainPage::open_book_page(int book_index) {
 	book_page->ShowModal();
     delete book_page;
 }
-

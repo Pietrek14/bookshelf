@@ -10,13 +10,33 @@
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Imaging.pngimage.hpp>
 #include <Book.h>
+#include <Vcl.ComCtrls.hpp>
 //---------------------------------------------------------------------------
 class TForm2 : public TForm
 {
 __published:	// IDE-managed Components
-	TImage *Image1;
+	TImage *BookCover;
 	TEdit *TitleField;
+	TEdit *AuthorField;
+	TLabel *AuthorLabel;
+	TEdit *SeriesField;
+	TLabel *SeriesLabel;
+	TComboBox *GenreSelect;
+	TLabel *GenreLabel;
+	TLabel *DescriptionLabel;
+	TDateTimePicker *ReleaseDateField;
+	TLabel *ReleaseDateLabel;
+	TEdit *LocationField;
+	TLabel *LocationLabel;
+	TLabel *RatingLabel;
+	TEdit *RatingField;
+	TButton *EditButton;
+	TEdit *CoverPathField;
+	TMemo *DescriptionField;
+	TButton *SaveButton;
+	void __fastcall EditButtonClick(TObject *Sender);
 private:	// User declarations
+    bool editing = false;
 public:		// User declarations
 	__fastcall TForm2(TComponent* Owner);
     __fastcall void load_book(const Book& book);
