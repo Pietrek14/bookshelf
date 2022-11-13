@@ -23,7 +23,7 @@ __fastcall void TForm2::load_book(const Book& book) {
 	this->AuthorField->Text = book.author;
 	this->SeriesField->Text = book.series;
 
-    bool genre_found = false;
+	bool genre_found = false;
 
 	for(int i = 0; i < this->GenreSelect->Items->Count && !genre_found; i++) {
     	auto genre = this->GenreSelect->Items->operator[](i);
@@ -51,14 +51,14 @@ __fastcall void TForm2::load_book(const Book& book) {
 			: book.location;
 
 	this->RatingField->Text = IntToStr(book.rating);
-    this->CoverPathField->Text = book.cover_path;
 
-    // Load the cover image
-	this->BookCover->Picture->LoadFromFile(book.cover_path);
+	// Load the cover image
+    this->load_book_cover(book.cover_path);
 }
 void __fastcall TForm2::EditButtonClick(TObject *Sender)
 {
 	this->editing = !this->editing;
+    this->changed = true;
 
     this->TitleField->Enabled = this->editing;
     this->AuthorField->Enabled = this->editing;
@@ -74,6 +74,53 @@ void __fastcall TForm2::EditButtonClick(TObject *Sender)
 		this->EditButton->Caption = "Finish";
 	} else {
         this->EditButton->Caption = "Edit";
+
+    	this->load_book_cover(this->CoverPathField->Text);
 	}
 }
+
+__fastcall void TForm2::load_book_cover(const UnicodeString& cover_path) {
+	this->BookCover->Picture->LoadFromFile(cover_path);
+	this->CoverPathField->Text = cover_path;
+}
 //---------------------------------------------------------------------------
+Book __fastcall TForm2::save() {
+	Book result;
+	result.title = this->TitleField->Text;
+	result.author = this->AuthorField->Text;
+	result.series = this->SeriesField->Text;
+	result.genre = this->GenreSelect->Items->operator[](
+		this->GenreSelect->ItemIndex
+	);
+	result.description = this->DescriptionField->Text;
+	result.release_date = DateToStr(
+		this->ReleaseDateField->Date,
+		TFormatSettings::Create("pl-PL")
+	);
+	if(this->LocationField->Text == "borrowed") {
+		result.location = "";
+	} else {
+		result.location = this->LocationField->Text;
+	}
+	auto rating = StrToInt(this->RatingField->Text);
+	if(rating < 1) {
+		MessageDlg(
+			"Rating has to be between 1-5. Capping to 1.",
+			mtError, TMsgDlgButtons() << mbOK,
+			0
+		);
+		rating = 1;
+	}
+	if(rating > 5) {
+		MessageDlg(
+			"Rating has to be between 1-5. Capping to 5.",
+			mtError, TMsgDlgButtons() << mbOK,
+			0
+		);
+		rating = 5;
+	}
+	result.rating = rating;
+	result.cover_path = this->CoverPathField->Text;
+
+    return result;
+}

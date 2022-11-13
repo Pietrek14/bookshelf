@@ -33,13 +33,15 @@ __published:	// IDE-managed Components
 	TButton *EditButton;
 	TEdit *CoverPathField;
 	TMemo *DescriptionField;
-	TButton *SaveButton;
 	void __fastcall EditButtonClick(TObject *Sender);
 private:	// User declarations
-    bool editing = false;
+	bool editing = false;
 public:		// User declarations
 	__fastcall TForm2(TComponent* Owner);
-    __fastcall void load_book(const Book& book);
+	__fastcall void load_book(const Book& book);
+	__fastcall void load_book_cover(const UnicodeString& cover_path);
+	__fastcall Book save();
+    bool changed = false;
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm2 *Form2;

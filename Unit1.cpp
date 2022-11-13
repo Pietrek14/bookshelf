@@ -37,7 +37,7 @@ __fastcall TBookCover::TBookCover(
 
 void __fastcall TBookCover::open_book_page(TObject*) {
 	auto *form = GetParentForm(this);
-    ((TMainPage*)form)->open_book_page(this->id);
+	((TMainPage*)form)->open_book_page(this->id);
 }
 
 __fastcall TMainPage::TMainPage(TComponent* Owner)
@@ -110,7 +110,10 @@ void __fastcall TMainPage::load_books(TObject *Sender)
 				'"'
 			);
 			current_book.rating = StrToInt(
-				book->Get("rating")->JsonValue->ToString()
+				AnsiDequotedStr(
+					book->Get("rating")->JsonValue->ToString(),
+					'"'
+				)
 			);
 			current_book.cover_path = AnsiDequotedStr(
 				book->Get("cover")->JsonValue->ToString(),
@@ -157,5 +160,39 @@ void __fastcall TMainPage::open_book_page(int book_index) {
 	auto *book_page = new TForm2(this);
     book_page->load_book(this->books[book_index]);
 	book_page->ShowModal();
+	if(book_page->changed) {
+		const Book new_book = book_page->save();
+		books[book_index] = new_book;
+		this->save_books();
+        this->load_books(nullptr);
+	}
     delete book_page;
+}
+
+void __fastcall TMainPage::save_books() {
+	TJSONArray *book_array;
+	__try {
+		book_array = new TJSONArray();
+
+		for(int i = 0; i < this->books.size(); i++) {
+			auto &book = this->books[i];
+			auto *book_json = new TJSONObject();
+
+			book_json->AddPair("title", book.title);
+			book_json->AddPair("author", book.author);
+			book_json->AddPair("series", book.series);
+			book_json->AddPair("genre", book.genre);
+			book_json->AddPair("description", book.description);
+			book_json->AddPair("release_date", book.release_date);
+			book_json->AddPair("location", book.location);
+			book_json->AddPair("rating", book.rating);
+			book_json->AddPair("cover", book.cover_path);
+
+			book_array->AddElement(book_json);
+		}
+
+		TFile::WriteAllText("books.json", book_array->ToString());
+	} __finally {
+        book_array->Free();
+    }
 }

@@ -1870,7 +1870,7 @@ object Form2: TForm2
     Text = '0'
   end
   object EditButton: TButton
-    Left = 392
+    Left = 456
     Top = 309
     Width = 57
     Height = 21
@@ -1894,13 +1894,5 @@ object Form2: TForm2
     Lines.Strings = (
       'DescriptionField')
     TabOrder = 9
-  end
-  object SaveButton: TButton
-    Left = 455
-    Top = 309
-    Width = 58
-    Height = 21
-    Caption = 'Save'
-    TabOrder = 10
   end
 end

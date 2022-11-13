@@ -47,6 +47,7 @@ private:	// User declarations
 	std::vector<Book> books;
 public:		// User declarations
 	__fastcall TMainPage(TComponent* Owner);
+    __fastcall void save_books();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TMainPage *MainPage;
