@@ -50,14 +50,14 @@ void __fastcall TMainPage::load_books(TObject *Sender)
 	System::UnicodeString file_contents;
 
 	try {
-        file_contents = TFile::ReadAllText("books.json");
+		file_contents = TFile::ReadAllText("books.json");
 	} catch (...) {
 		MessageDlg(
 			"The 'books.json' file has not been found!",
 			mtError, TMsgDlgButtons() << mbOK,
 			0
 		);
-        return;
+		return;
 	}
 
 	auto *books = (TJSONArray*) TJSONObject::ParseJSONValueUTF8(
@@ -143,7 +143,7 @@ void __fastcall TMainPage::update_list(TListBox *list_box)
 //---------------------------------------------------------------------------
 
 void __fastcall TMainPage::update_book_panel(TGridPanel *book_panel) {
-    // TODO: Clean the panel children
+	book_panel->DestroyComponents();
 
 	for(int i = 0; i < this->books.size(); i++) {
 		auto& book = this->books[i];
@@ -152,7 +152,7 @@ void __fastcall TMainPage::update_book_panel(TGridPanel *book_panel) {
 			book_panel,
 			i,
 			book.cover_path
-		);
+		);     
 	}
 }
 

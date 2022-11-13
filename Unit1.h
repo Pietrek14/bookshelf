@@ -20,7 +20,7 @@
 #include <unordered_map>
 //---------------------------------------------------------------------------
 class TBookCover : TImage {
-    size_t id;
+	size_t id;
 
 public:
 	__fastcall virtual TBookCover(
@@ -30,6 +30,7 @@ public:
 	);
 
 	void __fastcall open_book_page(TObject*);
+    static void __fastcall delete_all();
 };
 
 class TMainPage : public TForm
