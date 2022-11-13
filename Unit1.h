@@ -5,6 +5,10 @@
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
 #include <System.JSON.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.ExtCtrls.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <System.StrUtils.hpp>
 #include <System.IOUtils.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>

@@ -115,10 +115,10 @@ void __fastcall TMainPage::load_books(TObject *Sender)
 					'"'
 				)
 			);
-			current_book.cover_path = AnsiDequotedStr(
+			current_book.cover_path = ReplaceStr(AnsiDequotedStr(
 				book->Get("cover")->JsonValue->ToString(),
 				'"'
-			);
+			), "\\\\", "\\");
 
             this->books.push_back(current_book);
         }
