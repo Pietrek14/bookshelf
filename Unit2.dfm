@@ -1878,13 +1878,6 @@ object Form2: TForm2
     TabOrder = 7
     OnClick = EditButtonClick
   end
-  object CoverPathField: TEdit
-    Left = 24
-    Top = 305
-    Width = 161
-    Height = 21
-    TabOrder = 8
-  end
   object DescriptionField: TMemo
     Left = 224
     Top = 171
@@ -1893,6 +1886,20 @@ object Form2: TForm2
     Enabled = False
     Lines.Strings = (
       'DescriptionField')
+    TabOrder = 8
+  end
+  object CoverButton: TButton
+    Left = 24
+    Top = 301
+    Width = 161
+    Height = 25
+    Caption = 'Change Cover'
+    Enabled = False
     TabOrder = 9
+    OnClick = CoverButtonClick
+  end
+  object CoverDialog: TOpenPictureDialog
+    Left = 208
+    Top = 288
   end
 end

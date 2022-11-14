@@ -11,6 +11,8 @@
 #include <Vcl.Imaging.pngimage.hpp>
 #include <Book.h>
 #include <Vcl.ComCtrls.hpp>
+#include <Vcl.Dialogs.hpp>
+#include <Vcl.ExtDlgs.hpp>
 //---------------------------------------------------------------------------
 class TForm2 : public TForm
 {
@@ -31,9 +33,11 @@ __published:	// IDE-managed Components
 	TLabel *RatingLabel;
 	TEdit *RatingField;
 	TButton *EditButton;
-	TEdit *CoverPathField;
 	TMemo *DescriptionField;
+	TOpenPictureDialog *CoverDialog;
+	TButton *CoverButton;
 	void __fastcall EditButtonClick(TObject *Sender);
+	void __fastcall CoverButtonClick(TObject *Sender);
 private:	// User declarations
 	bool editing = false;
 public:		// User declarations
@@ -41,7 +45,8 @@ public:		// User declarations
 	__fastcall void load_book(const Book& book);
 	__fastcall void load_book_cover(const UnicodeString& cover_path);
 	__fastcall Book save();
-    bool changed = false;
+	bool changed = false;
+	UnicodeString cover_path;
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm2 *Form2;

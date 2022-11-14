@@ -68,20 +68,18 @@ void __fastcall TForm2::EditButtonClick(TObject *Sender)
     this->ReleaseDateField->Enabled = this->editing;
     this->LocationField->Enabled = this->editing;
     this->RatingField->Enabled = this->editing;
-	this->CoverPathField->Enabled = this->editing;
+	this->CoverButton->Enabled = this->editing;
 
 	if(this->editing) {
 		this->EditButton->Caption = "Finish";
 	} else {
         this->EditButton->Caption = "Edit";
-
-    	this->load_book_cover(this->CoverPathField->Text);
 	}
 }
 
 __fastcall void TForm2::load_book_cover(const UnicodeString& cover_path) {
 	this->BookCover->Picture->LoadFromFile(cover_path);
-	this->CoverPathField->Text = cover_path;
+	this->cover_path = cover_path;
 }
 //---------------------------------------------------------------------------
 Book __fastcall TForm2::save() {
@@ -120,7 +118,23 @@ Book __fastcall TForm2::save() {
 		rating = 5;
 	}
 	result.rating = rating;
-	result.cover_path = this->CoverPathField->Text;
+	result.cover_path = this->cover_path;
 
     return result;
 }
+void __fastcall TForm2::CoverButtonClick(TObject *Sender)
+{
+	if(this->CoverDialog->Execute()) {
+        if(!FileExists(this->CoverDialog->FileName)) {
+			MessageDlg(
+				"Such file doesn't exist!",
+				mtError, TMsgDlgButtons() << mbOK,
+				0
+			);
+		} else {
+			this->load_book_cover(this->CoverDialog->FileName);
+		}
+    }
+}
+//---------------------------------------------------------------------------
+
