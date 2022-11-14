@@ -15,11 +15,18 @@ object MainPage: TMainPage
   PixelsPerInch = 96
   TextHeight = 13
   object GenreLabel: TLabel
-    Left = 329
+    Left = 369
     Top = 27
     Width = 33
     Height = 13
     Caption = 'Genre:'
+  end
+  object SearchByLabel: TLabel
+    Left = 168
+    Top = 27
+    Width = 52
+    Height = 13
+    Caption = 'Search By:'
   end
   object SearchBar: TEdit
     Left = 0
@@ -29,23 +36,33 @@ object MainPage: TMainPage
     Align = alTop
     TabOrder = 0
     TextHint = #55357#56590' Search'
+    OnChange = SearchBarChange
   end
   object Genre: TComboBox
-    Left = 368
+    Left = 408
     Top = 24
-    Width = 183
+    Width = 134
     Height = 21
     ItemIndex = 0
     TabOrder = 1
     Text = 'All'
+    OnChange = SearchBarChange
     Items.Strings = (
-      'All')
+      'All'
+      'Comedy'
+      'Drama'
+      'Horror'
+      'Thriller'
+      'Science-Fiction'
+      'Fantasy'
+      'Children'
+      'Other')
   end
   object BookPanel: TGridPanel
     Left = 0
     Top = 51
     Width = 550
-    Height = 291
+    Height = 294
     ColumnCollection = <
       item
         Value = 25.000000000000000000
@@ -81,5 +98,22 @@ object MainPage: TMainPage
     Caption = 'Add Book'
     TabOrder = 3
     OnClick = AddBookButtonClick
+  end
+  object SearchBySelect: TComboBox
+    Left = 226
+    Top = 24
+    Width = 127
+    Height = 21
+    ItemIndex = 0
+    TabOrder = 4
+    Text = 'All'
+    OnChange = SearchBarChange
+    Items.Strings = (
+      'All'
+      'Title'
+      'Series'
+      'Author'
+      'Description'
+      'Release Date')
   end
 end

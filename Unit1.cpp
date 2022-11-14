@@ -38,6 +38,14 @@ __fastcall TBookCover::TBookCover(
 void __fastcall TBookCover::open_book_page(TObject*) {
 	auto *form = GetParentForm(this);
 	((TMainPage*)form)->open_book_page(this->id);
+} 
+
+void __fastcall TBookCover::set_visible(const bool visible) {
+	this->Visible = visible;
+}
+
+size_t inline TBookCover::get_id() {
+    return this->id;
 }
 
 __fastcall TMainPage::TMainPage(TComponent* Owner)
@@ -61,7 +69,7 @@ void __fastcall TMainPage::load_books(TObject *Sender)
 	}
 
 	auto *books = (TJSONArray*) TJSONObject::ParseJSONValueUTF8(
-		TEncoding::ASCII->GetBytes(file_contents),
+		TEncoding::UTF8->GetBytes(file_contents),
 		0
 	);
 
@@ -127,7 +135,7 @@ void __fastcall TMainPage::load_books(TObject *Sender)
         books->Free();
     }
 
-    update_book_panel(this->BookPanel);
+    update_book_panel(this->BookPanel, this->books);
 }
 
 //---------------------------------------------------------------------------
@@ -142,11 +150,14 @@ void __fastcall TMainPage::update_list(TListBox *list_box)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TMainPage::update_book_panel(TGridPanel *book_panel) {
+void __fastcall TMainPage::update_book_panel(
+	TGridPanel *book_panel,
+	std::vector<Book> &books
+) {
 	book_panel->DestroyComponents();
-
-	for(int i = 0; i < this->books.size(); i++) {
-		auto& book = this->books[i];
+	
+	for(int i = 0; i < books.size(); i++) {
+		auto& book = books[i];
 
 		auto *book_cover = new TBookCover(
 			book_panel,
@@ -211,6 +222,59 @@ void __fastcall TMainPage::AddBookButtonClick(TObject *Sender)
         this->load_books(nullptr);
     }
 	delete add_book_page;
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TMainPage::SearchBarChange(TObject *Sender)
+{
+	const auto& search_by =
+		(*this->SearchBySelect->Items)[this->SearchBySelect->ItemIndex];
+
+	const auto& genre = (*this->SearchBySelect->Items)[this->SearchBySelect->ItemIndex];
+
+	const auto& search_query = this->SearchBar->Text;
+
+	std::vector<Book> search_result;
+		
+	for(auto& book : this->books) {
+		bool title_contains = ContainsText(book.title, search_query),
+			series_contains = ContainsText(book.series, search_query),
+			author_contains = ContainsText(book.author, search_query),
+			description_contains = ContainsText(book.description, search_query),
+			release_date_contains = ContainsText(
+				StrToDate(book.release_date),
+				search_query
+			), should_display;
+		
+		if(search_by == "All") {
+			should_display = title_contains
+				|| series_contains
+				|| author_contains
+				|| description_contains
+				|| release_date_contains;	
+		} else if(search_by == "Title") {
+			should_display = title_contains;
+		} else if(search_by == "Series") {
+			should_display = series_contains;
+		} else if(search_by == "Author") {
+			should_display = author_contains;
+		} else if(search_by == "Description") {
+			should_display = description_contains;
+		} else if(search_by == "Release Date") {
+			should_display = release_date_contains;
+		}
+
+		if(search_query.IsEmpty()) {
+            should_display = true;
+        }
+		
+		if(should_display) {
+            search_result.push_back(book);
+        }
+	}
+
+	update_book_panel(this->BookPanel, search_result);
 }
 //---------------------------------------------------------------------------
 

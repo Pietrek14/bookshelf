@@ -24,7 +24,7 @@
 #include <vector>
 #include <unordered_map>
 //---------------------------------------------------------------------------
-class TBookCover : TImage {
+class TBookCover : public TImage {
 	size_t id;
 
 public:
@@ -35,6 +35,8 @@ public:
 	);
 
 	void __fastcall open_book_page(TObject*);
+    void __fastcall set_visible(const bool visible);
+    size_t inline get_id();
     static void __fastcall delete_all();
 };
 
@@ -46,13 +48,19 @@ __published:	// IDE-managed Components
 	TLabel *GenreLabel;
 	TGridPanel *BookPanel;
 	TButton *AddBookButton;
+	TComboBox *SearchBySelect;
+	TLabel *SearchByLabel;
 	void __fastcall load_books(TObject *Sender);
 	void __fastcall update_list(TListBox *Sender);
-	void __fastcall update_book_panel(TGridPanel *book_panel);
 	void __fastcall open_book_page(int book_index);
 	void __fastcall AddBookButtonClick(TObject *Sender);
+	void __fastcall SearchBarChange(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
+	void __fastcall update_book_panel(
+		TGridPanel *book_panel,
+		std::vector<Book> &books
+	);
 	std::vector<Book> books;
 	__fastcall TMainPage(TComponent* Owner);
     __fastcall void save_books();
