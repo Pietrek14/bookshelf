@@ -2,7 +2,12 @@
 
 #ifndef BookH
 #define BookH
+
+#include <System.hpp>
+
 struct Book {
+    size_t id = 0;
+
     System::UnicodeString title;
     System::UnicodeString series;
 	System::UnicodeString author;

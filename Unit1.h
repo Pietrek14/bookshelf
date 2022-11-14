@@ -44,7 +44,7 @@ class TMainPage : public TForm
 {
 __published:	// IDE-managed Components
 	TEdit *SearchBar;
-	TComboBox *Genre;
+	TComboBox *GenreSelect;
 	TLabel *GenreLabel;
 	TGridPanel *BookPanel;
 	TButton *AddBookButton;

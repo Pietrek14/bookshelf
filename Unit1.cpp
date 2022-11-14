@@ -83,6 +83,8 @@ void __fastcall TMainPage::load_books(TObject *Sender)
 			auto *book = (TJSONObject*) books->Get(i);
 			Book current_book;
 
+            current_book.id = i;
+			
 			current_book.title = AnsiDequotedStr(
 				book->Get("title")->JsonValue->ToString(),
 				'"'
@@ -161,7 +163,7 @@ void __fastcall TMainPage::update_book_panel(
 
 		auto *book_cover = new TBookCover(
 			book_panel,
-			i,
+			book.id,
 			book.cover_path
 		);     
 	}
@@ -231,8 +233,9 @@ void __fastcall TMainPage::SearchBarChange(TObject *Sender)
 	const auto& search_by =
 		(*this->SearchBySelect->Items)[this->SearchBySelect->ItemIndex];
 
-	const auto& genre = (*this->SearchBySelect->Items)[this->SearchBySelect->ItemIndex];
-
+	const auto& genre =
+		(*this->GenreSelect->Items)[this->GenreSelect->ItemIndex];
+		
 	const auto& search_query = this->SearchBar->Text;
 
 	std::vector<Book> search_result;
@@ -268,6 +271,11 @@ void __fastcall TMainPage::SearchBarChange(TObject *Sender)
 		if(search_query.IsEmpty()) {
             should_display = true;
         }
+
+		if(genre != "All") {
+			if(book.genre != genre)
+				should_display = false;
+		}
 		
 		if(should_display) {
             search_result.push_back(book);

@@ -38,7 +38,7 @@ object MainPage: TMainPage
     TextHint = #55357#56590' Search'
     OnChange = SearchBarChange
   end
-  object Genre: TComboBox
+  object GenreSelect: TComboBox
     Left = 408
     Top = 24
     Width = 134
