@@ -10,6 +10,8 @@
 #include <Vcl.ComCtrls.hpp>
 
 #include "Book.h"
+#include <Vcl.Dialogs.hpp>
+#include <Vcl.ExtDlgs.hpp>
 //---------------------------------------------------------------------------
 class TForm3 : public TForm
 {
@@ -30,15 +32,18 @@ __published:	// IDE-managed Components
 	TLabel *LocationLabel;
 	TLabel *RatingLabel;
 	TEdit *RatingField;
-	TEdit *CoverPathField;
 	TLabel *CoverLabel;
 	TButton *AddButton;
+	TOpenPictureDialog *CoverDialog;
+	TButton *CoverButton;
 	void __fastcall AddButtonClick(TObject *Sender);
+	void __fastcall CoverButtonClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm3(TComponent* Owner);
 	bool added = false;
-    Book book;
+    UnicodeString cover_path = "";
+	Book book;
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm3 *Form3;

@@ -35,14 +35,14 @@ void __fastcall TForm3::AddButtonClick(TObject *Sender)
 		return;
 	}
 
-	if(this->CoverPathField->Text.IsEmpty()) {
-		MessageDlg(
-			"Cover path can't be empty!",
+	if(this->cover_path == "") {
+        MessageDlg(
+			"No cover selected!",
 			mtError, TMsgDlgButtons() << mbOK,
 			0
 		);
-		return;
-	}
+        return;
+    }
 
     Book result;
 	result.title = this->TitleField->Text;
@@ -80,11 +80,25 @@ void __fastcall TForm3::AddButtonClick(TObject *Sender)
 	}
 	result.rating = rating;
 
-    // TODO: Check if cover_path is a valid picture file
-	result.cover_path = this->CoverPathField->Text;
+	result.cover_path = this->cover_path;
 
 	this->added = true;
     this->book = result;
 	this->Close();
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm3::CoverButtonClick(TObject *Sender)
+{
+	if(this->CoverDialog->Execute()) {
+		if(!FileExists(this->CoverDialog->FileName)) {
+			MessageDlg(
+				"Such file doesn't exist!",
+				mtError, TMsgDlgButtons() << mbOK,
+				0
+			);
+		} else {
+			this->cover_path = this->CoverDialog->FileName;
+        }
+    }
 }
 //---------------------------------------------------------------------------

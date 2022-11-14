@@ -149,20 +149,26 @@ object Form3: TForm3
     NumbersOnly = True
     TabOrder = 7
   end
-  object CoverPathField: TEdit
-    Left = 82
-    Top = 232
-    Width = 161
-    Height = 21
-    TabOrder = 8
-  end
   object AddButton: TButton
     Left = 348
     Top = 230
     Width = 75
     Height = 25
     Caption = 'Add'
-    TabOrder = 9
+    TabOrder = 8
     OnClick = AddButtonClick
+  end
+  object CoverButton: TButton
+    Left = 82
+    Top = 232
+    Width = 75
+    Height = 25
+    Caption = 'Choose Cover'
+    TabOrder = 9
+    OnClick = CoverButtonClick
+  end
+  object CoverDialog: TOpenPictureDialog
+    Left = 216
+    Top = 232
   end
 end
