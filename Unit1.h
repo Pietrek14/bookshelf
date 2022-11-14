@@ -19,6 +19,7 @@
 #include <Vcl.Imaging.pngimage.hpp>
 #include <Book.h>
 #include <Unit2.h>
+#include <Unit3.h>
 #include <Vcl.ComCtrls.hpp>
 #include <vector>
 #include <unordered_map>
@@ -44,13 +45,15 @@ __published:	// IDE-managed Components
 	TComboBox *Genre;
 	TLabel *GenreLabel;
 	TGridPanel *BookPanel;
+	TButton *AddBookButton;
 	void __fastcall load_books(TObject *Sender);
 	void __fastcall update_list(TListBox *Sender);
 	void __fastcall update_book_panel(TGridPanel *book_panel);
 	void __fastcall open_book_page(int book_index);
+	void __fastcall AddBookButtonClick(TObject *Sender);
 private:	// User declarations
-	std::vector<Book> books;
 public:		// User declarations
+	std::vector<Book> books;
 	__fastcall TMainPage(TComponent* Owner);
     __fastcall void save_books();
 };

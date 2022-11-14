@@ -73,4 +73,13 @@ object MainPage: TMainPage
       end>
     TabOrder = 2
   end
+  object AddBookButton: TButton
+    Left = 8
+    Top = 24
+    Width = 73
+    Height = 21
+    Caption = 'Add Book'
+    TabOrder = 3
+    OnClick = AddBookButtonClick
+  end
 end

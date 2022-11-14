@@ -196,3 +196,16 @@ void __fastcall TMainPage::save_books() {
         book_array->Free();
     }
 }
+void __fastcall TMainPage::AddBookButtonClick(TObject *Sender)
+{
+	auto *add_book_page = new TForm3(this);
+	add_book_page->ShowModal();
+	if(add_book_page->added) {
+        this->books.push_back(add_book_page->book);     
+		this->save_books();
+        this->load_books(nullptr);
+    }
+	delete add_book_page;
+}
+//---------------------------------------------------------------------------
+
