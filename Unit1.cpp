@@ -160,9 +160,14 @@ void __fastcall TMainPage::open_book_page(int book_index) {
 	auto *book_page = new TForm2(this);
     book_page->load_book(this->books[book_index]);
 	book_page->ShowModal();
-	if(book_page->changed) {
+
+	if(book_page->remove) {
+		this->books.erase(this->books.begin() + book_index);     
+		this->save_books();
+        this->load_books(nullptr);
+	} else if(book_page->changed) {
 		const Book new_book = book_page->save();
-		books[book_index] = new_book;
+		this->books[book_index] = new_book;
 		this->save_books();
         this->load_books(nullptr);
 	}

@@ -36,8 +36,10 @@ __published:	// IDE-managed Components
 	TMemo *DescriptionField;
 	TOpenPictureDialog *CoverDialog;
 	TButton *CoverButton;
+	TButton *DeleteButton;
 	void __fastcall EditButtonClick(TObject *Sender);
 	void __fastcall CoverButtonClick(TObject *Sender);
+	void __fastcall DeleteButtonClick(TObject *Sender);
 private:	// User declarations
 	bool editing = false;
 public:		// User declarations
@@ -46,6 +48,7 @@ public:		// User declarations
 	__fastcall void load_book_cover(const UnicodeString& cover_path);
 	__fastcall Book save();
 	bool changed = false;
+    bool remove = false;
 	UnicodeString cover_path;
 };
 //---------------------------------------------------------------------------

@@ -1870,7 +1870,7 @@ object Form2: TForm2
     Text = '0'
   end
   object EditButton: TButton
-    Left = 456
+    Left = 392
     Top = 309
     Width = 57
     Height = 21
@@ -1897,6 +1897,15 @@ object Form2: TForm2
     Enabled = False
     TabOrder = 9
     OnClick = CoverButtonClick
+  end
+  object DeleteButton: TButton
+    Left = 455
+    Top = 309
+    Width = 58
+    Height = 21
+    Caption = 'Delete'
+    TabOrder = 10
+    OnClick = DeleteButtonClick
   end
   object CoverDialog: TOpenPictureDialog
     Left = 208

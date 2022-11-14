@@ -138,3 +138,10 @@ void __fastcall TForm2::CoverButtonClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm2::DeleteButtonClick(TObject *Sender)
+{
+	this->remove = true;
+    this->Close();
+}
+//---------------------------------------------------------------------------
+
